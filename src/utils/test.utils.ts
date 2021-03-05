@@ -12,6 +12,7 @@ import { Consulta } from "../database/entity/Consulta";
 // Factory Médico
 
 export async function getMedicoPelaFactory(): Promise<Medico> {
+    await retrieveConnection();
     return await getRepository(Medico).findOne({ 'status':true });
 }
 

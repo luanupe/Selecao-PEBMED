@@ -2,12 +2,26 @@ import { getRepository, Repository } from "typeorm";
 
 import { getHashSenha } from '../src/utils/hash.utils';
 
+import { getMedicoPelaFactory } from "../src/utils/test.utils";
+
 import { Medico } from "../src/database/entity/Medico";
 import { MedicoToken } from "../src/database/entity/MedicoToken";
 
 const supertest = require('supertest');
 const server = require('../server');
 const mock = jest.fn();
+
+export async function autenticarJWT() {
+    // Buscar profissional
+    let medico:Medico = await getMedicoPelaFactory();
+
+    // Autenticar
+    const app = await supertest(server);
+    const res = await app.post('/api/v1/autenticar/login').send({ 'email':medico.email, 'senha':'123456' });
+
+    // Sessão
+    return { 'email': medico.email, 'data':res.body };
+}
 
 describe('Testar autenticação e JWT', () => {
 
