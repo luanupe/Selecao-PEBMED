@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "rootDir": "./",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "strictPropertyInitialization": false,
+      "experimentalDecorators": true,
+      "allowJs": true,
+      "esModuleInterop": true,
+      "strict": false
+    }
+  }
