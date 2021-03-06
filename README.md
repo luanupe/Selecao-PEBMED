@@ -18,17 +18,17 @@ Lembrando que o IP Público não é fixo, uma vez que estou utilizando uma máqu
 
 ## Checklist 
 
-- [x] REST
 - [x] NodeJS
-- [x] Postman
+- [x] REST
 - [x] Validação de Dados
+- [x] JWT Token
+- [x] Testes Unitários
 - [x] Diagrama ER
 - [x] MySQL
-- [x] Testes Unitários
-- [ ] Docker
+- [x] Postman
 - [x] Deploy AWS
-- [x] JWT Token
 - [x] Lint
+- [ ] Docker
 
 ## Setup
 
