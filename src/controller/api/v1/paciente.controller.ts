@@ -57,7 +57,7 @@ router.get('/:paciente', async (req, res) => {
     retrieveConnection().then(async () => {
 
         try {
-            const paciente:Paciente = await getRepository(Paciente).findOneOrFail(req.params.paciente);
+            const paciente:Paciente = await getRepository(Paciente).findOneOrFail(req.params.paciente, { withDeleted: true });
             return res.send(paciente);
         }
         catch (e) {

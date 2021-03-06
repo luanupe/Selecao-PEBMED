@@ -12,11 +12,11 @@ export class Consulta {
     @Column({ nullable: true, type: "text" })
     observacao: string;
 
-    @OneToOne( type=>Agendamento, { onUpdate: 'CASCADE', onDelete: 'RESTRICT', nullable: false } )
+    @OneToOne( () => Agendamento, (agendamento:Agendamento) => agendamento.consulta, { nullable:false, onUpdate:'CASCADE', onDelete:'RESTRICT' } )
     @JoinColumn()
     agendamento: Agendamento;
 
-    @OneToMany( type => ConsultaAnotacao, consulta => Consulta )
+    @OneToMany( () => ConsultaAnotacao, (anotacao:ConsultaAnotacao) => anotacao.consulta, { eager:true } )
     anotacoes: ConsultaAnotacao[];
 
 }

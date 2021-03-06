@@ -40,7 +40,7 @@ export class Paciente {
     @DeleteDateColumn()
     deletedAt: Date;
 
-    @OneToMany( type => Agendamento, paciente => Paciente )
+    @OneToMany( () => Agendamento, (agendamento:Agendamento) => agendamento.paciente, { eager: true } )
     agendamentos: Agendamento[];
 
 }

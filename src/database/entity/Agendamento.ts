@@ -1,7 +1,8 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToOne, ManyToOne} from "typeorm";
 
 import { Medico } from "./Medico";
 import { Paciente } from "./Paciente";
+import { Consulta } from "./Consulta";
 
 @Entity()
 export class Agendamento {
@@ -12,12 +13,6 @@ export class Agendamento {
     @Column({ type: 'timestamp' })
     horario: Date;
 
-    @ManyToOne( type => Medico, agendamentos => Agendamento, { onUpdate: 'CASCADE', onDelete: 'RESTRICT' } )
-    medico: Medico;
-
-    @ManyToOne( type => Paciente, agendamentos => Agendamento, { onUpdate: 'CASCADE', onDelete: 'RESTRICT' } )
-    paciente: Paciente;
-
     @CreateDateColumn()
     createdAt: Date;
 
@@ -26,5 +21,14 @@ export class Agendamento {
 
     @DeleteDateColumn()
     deletedAt: Date;
+
+    @ManyToOne( () => Medico, { nullable:false, onUpdate:'CASCADE', onDelete:'RESTRICT' } )
+    medico: Medico;
+
+    @ManyToOne( () => Paciente, (paciente:Paciente) => paciente.agendamentos, { nullable:false, onUpdate:'CASCADE', onDelete:'RESTRICT' } )
+    paciente: Paciente;
+
+    @OneToOne( () => Consulta, (consulta: Consulta) => consulta.agendamento, { nullable:true, eager:true } )
+    consulta: Consulta;
 
 }

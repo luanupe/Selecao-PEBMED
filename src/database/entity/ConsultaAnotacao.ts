@@ -11,7 +11,7 @@ export class ConsultaAnotacao {
     @Column({ type: "text" })
     conteudo: string;
 
-    @ManyToOne( type => Consulta, anotacoes => ConsultaAnotacao, { onUpdate: 'CASCADE', onDelete: 'RESTRICT' } )
+    @ManyToOne( () => Consulta, (consulta: Consulta) => consulta.anotacoes, { nullable:false, onUpdate:'CASCADE', onDelete:'CASCADE' } )
     consulta: Consulta;
 
 }

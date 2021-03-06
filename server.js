@@ -10,6 +10,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
+// Arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Controllers
 app.use('/api/v1/autenticar', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'autenticar.controller')));
 app.use('/api/v1/paciente', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'paciente.controller')));

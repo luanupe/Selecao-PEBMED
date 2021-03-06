@@ -27,10 +27,10 @@ export class Medico {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @OneToMany( type => MedicoToken, medico => Medico )
+    @OneToMany( () => MedicoToken, (token:MedicoToken) => token.medico )
     tokens: MedicoToken[];
 
-    @OneToMany( type => Agendamento, medico => Medico )
+    @OneToMany( () => Agendamento, (agendamento:Agendamento) => agendamento.medico )
     agendamentos: Agendamento[];
 
 }

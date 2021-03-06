@@ -19,7 +19,7 @@ export class MedicoToken {
     @DeleteDateColumn()
     logoutAt: Date;
 
-    @ManyToOne( type => Medico, tokens => MedicoToken, { nullable: false, onUpdate: 'CASCADE', onDelete: 'RESTRICT' } )
+    @ManyToOne( () => Medico, (medico:Medico) => medico.tokens, { nullable:false, onUpdate:'CASCADE', onDelete:'RESTRICT' } )
     medico: Medico;
 
 }

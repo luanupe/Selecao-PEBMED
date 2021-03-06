@@ -39,8 +39,22 @@ export const validacaoObservacao:any[] = [
 /*
     [OK] Validar se o campo de anotações está preenchido
 */
+/*
+    [OK] Validar se o campo de consultas está preenchido
+*/
 export const validacaoAnotacao:any[] = [
     // Validar campo de email
     body('conteudo')
-        .isLength({ min:1 }).withMessage('O campo de anotação não pode ficar em branco')
+        .isLength({ min:1 }).withMessage('O campo de anotação não pode ficar em branco'),
+    
+    // Validar agendamento
+    body('consulta')
+        .isObject().withMessage('As informações de agendamento não são válidas')
+        .custom(async (value) => {
+
+            // Checar se a consulta existe na base
+            const consulta = await getRepository(Consulta).findOne(value.id);
+            if ((consulta == null)) return Promise.reject("A consutla informada não existe");
+
+        })
 ];

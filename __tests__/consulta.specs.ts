@@ -76,8 +76,9 @@ describe('Rotas de consultas: AUTENTICADO', () => {
         
         // Abrir Consulta
         let consulta:Consulta = await getConsultaPelaFactory();
+        let data = { consulta: { id:consulta.id }, conteudo:'Teste de Anotação' };
         const app = await supertest(server);
-        const res = await app.post('/api/v1/consulta/' + consulta.id + '/anotacao').set('x-access-token', token.data.token).send({ conteudo:'Teste de Anotação' });
+        const res = await app.post('/api/v1/consulta/' + consulta.id + '/anotacao').set('x-access-token', token.data.token).send(data);
 
         // Assert
         expect(res.statusCode).toEqual(201);

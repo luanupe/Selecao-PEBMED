@@ -98,7 +98,7 @@ router.post('/:consulta/anotacao', validacaoAnotacao, async (req, res) => {
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Persiste e retorna
-            const anotacao:ConsultaAnotacao = await getRepository(ConsultaAnotacao).save({ "id":req.params.consulta, "conteudo":req.body.conteudo });
+            const anotacao:ConsultaAnotacao = await getRepository(ConsultaAnotacao).save(req.body);
             return res.status(201).send(anotacao);
         }
         catch (e) {
