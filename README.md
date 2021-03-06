@@ -52,7 +52,9 @@ Lembrando que o IP Público não é fixo, uma vez que estou utilizando uma máqu
 
 - Deploy da aplicação: `npm run start`
 
-## Postman
+## Postman (Documentação API)
+
+A aplicação foi dividida em 4 "módulos" (controllers), é possível importar as Collections a partir dos seguintes links:
 
 - [Autenticação](https://app.getpostman.com/run-collection/028226daa69df86ca430#?env%5BDevelopment%5D=W3sia2V5IjoiU0VSVkVSX1BPUlQiLCJ2YWx1ZSI6IjgwMDAiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IlNFUlZFUl9BRERSRVNTIiwidmFsdWUiOiJsb2NhbGhvc3QiLCJlbmFibGVkIjp0cnVlfV0=) (Login, Logout - JWT Tokens)
 
