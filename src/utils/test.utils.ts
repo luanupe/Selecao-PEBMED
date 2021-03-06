@@ -48,7 +48,7 @@ function getHorarioAleatorio(): string {
     return moment(tempo).format("YYYY-MM-DD hh:mm:ss");
 }
 
-async function getAgendamentoFactory(): Promise<any> {
+export async function getAgendamentoFactory(): Promise<any> {
     await retrieveConnection();
 
     let horario:string = getHorarioAleatorio();
