@@ -25,7 +25,7 @@ router.use(validarJwt);
 router.get('/', async (req, res) => {
     retrieveConnection().then(async () => {
 
-        const agendamentos:Agendamento[] = await getRepository(Agendamento).find();
+        const agendamentos:Agendamento[] = await getRepository(Agendamento).find({ "relations": [ "paciente", "consulta" ] });
         return res.status(200).send(agendamentos);
 
     });
@@ -61,7 +61,7 @@ router.get('/:agendamento', async (req, res) => {
     retrieveConnection().then(async () => {
 
         try {
-            const agendamento:Agendamento = await getRepository(Agendamento).findOneOrFail(req.params.agendamento);
+            const agendamento:Agendamento = await getRepository(Agendamento).findOneOrFail(req.params.agendamento, { "relations": [ "paciente", "consulta" ] });
             return res.status(200).send(agendamento);
         }
         catch (e) {

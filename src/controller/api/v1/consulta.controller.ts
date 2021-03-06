@@ -52,7 +52,7 @@ router.get('/:consulta', async (req, res) => {
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Busca e retorna
-            const consulta:Consulta = await getRepository(Consulta).findOneOrFail(req.params.consulta);
+            const consulta:Consulta = await getRepository(Consulta).findOneOrFail(req.params.consulta, { "relations": [ "agendamento" ] });
             return res.status(200).send(consulta);
         }
         catch (e) {
