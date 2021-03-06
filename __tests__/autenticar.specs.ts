@@ -53,9 +53,7 @@ describe('Testar autenticação e JWT', () => {
     it ('Desejo que ao autenticar com credenciais válidas o status code seja 200 e exista "token" e "medicoId" na resposta', async () => {
 
         // Persistir médico
-        let senha:string = await getHashSenha('123456');
-        let email:string = 'test' + Math.random() + '@prontomed.com';
-        let medico:Medico = await getRepository(Medico).save({ 'nome':'Teste ProntoMed', 'email':email, 'senha':senha });
+        let medico:Medico = await getMedicoPelaFactory();
 
         // Enviar credenciais válidas
         const app = await supertest(server);

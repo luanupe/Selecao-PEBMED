@@ -2,7 +2,7 @@ import { Result, ValidationError } from "express-validator";
 
 export class ValidationException extends Error {
 
-    errors:ValidationError[];
+    public errors:ValidationError[];
 
     constructor(errors:Result<ValidationError>) {
 

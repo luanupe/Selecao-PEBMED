@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { getRepository } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 
 import { retrieveConnection } from "./conn.utils";
 
@@ -64,12 +64,15 @@ export async function getAgendamentoFactory(): Promise<any> {
 
 export async function getAgendamentoPelaFactory(): Promise<Agendamento> {
     let data:any = await getAgendamentoFactory();
-    return await getRepository(Agendamento).save(data);
+    let agendamento:Agendamento = await getRepository(Agendamento).save(data);
+    return agendamento;
 }
 
 // Factory consulta
 
 export async function getConsultaPelaFactory(): Promise<Consulta> {
-    let agendamento:Agendamento = await getAgendamentoFactory();
-    return await getRepository(Consulta).save({ agendamento: { id:agendamento.id } });
+    let agendamento:Agendamento = await getAgendamentoPelaFactory();
+    let repositorio:Repository<Consulta> = getRepository(Consulta);
+    let consulta = await repositorio.save({ agendamento: { id:agendamento.id } });
+    return consulta;
 }
