@@ -10,11 +10,11 @@ Sobre o Docker: não consegui rodar a aplicação através de um container Docke
 
 # Instância AWS
 
-ec2-3-21-44-33.us-east-2.compute.amazonaws.com:8000
-ou
-3.21.44.33:8000
+Lembrando que o IP Público não é fixo, uma vez que estou utilizando uma máquina EC2 do free tier:
 
-Lembrando que o IP Público não é fixo
+- DNS IPv4 Público: **ec2-3-21-44-33.us-east-2.compute.amazonaws.com:8000**
+- IPv4 Público (Atual): **3.21.44.33:8000**
+
 
 ## Checklist 
 
