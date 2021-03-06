@@ -19,7 +19,7 @@ export async function getMedicoPelaFactory(): Promise<Medico> {
 // Factory Paciente
 
 export function getPacienteFactory(uuid:string=null): any {
-    let data:any = {
+    const data:any = {
         'nome': 'Paciente Teste',
         'email': 'paciente' + Math.random() + '@prontomed.com',
         'nascimento': '1997-08-10',
@@ -36,14 +36,14 @@ export function getPacienteFactory(uuid:string=null): any {
 
 export async function getPacientePelaFactory(): Promise<Paciente> {
     await retrieveConnection();
-    let data:any = getPacienteFactory();
+    const data:any = getPacienteFactory();
     return await getRepository(Paciente).save(data);
 }
 
 // Factory Agendamento
 
 function getHorarioAleatorio(): string {
-    let tempo = new Date();
+    const tempo = new Date();
     for (let i = 0; i < (Math.random() * 100); ++i) tempo.setMinutes(tempo.getMinutes() * (Math.random() * 1000));
     return moment(tempo).format("YYYY-MM-DD hh:mm:ss");
 }
@@ -51,9 +51,9 @@ function getHorarioAleatorio(): string {
 export async function getAgendamentoFactory(): Promise<any> {
     await retrieveConnection();
 
-    let horario:string = getHorarioAleatorio();
-    let medico:Medico = await getMedicoPelaFactory();
-    let paciente:Paciente = await getPacientePelaFactory();
+    const horario:string = getHorarioAleatorio();
+    const medico:Medico = await getMedicoPelaFactory();
+    const paciente:Paciente = await getPacientePelaFactory();
 
     return {
         'horario': horario,
@@ -63,16 +63,16 @@ export async function getAgendamentoFactory(): Promise<any> {
 }
 
 export async function getAgendamentoPelaFactory(): Promise<Agendamento> {
-    let data:any = await getAgendamentoFactory();
-    let agendamento:Agendamento = await getRepository(Agendamento).save(data);
+    const data:any = await getAgendamentoFactory();
+    const agendamento:Agendamento = await getRepository(Agendamento).save(data);
     return agendamento;
 }
 
 // Factory consulta
 
 export async function getConsultaPelaFactory(): Promise<Consulta> {
-    let agendamento:Agendamento = await getAgendamentoPelaFactory();
-    let repositorio:Repository<Consulta> = getRepository(Consulta);
-    let consulta = await repositorio.save({ agendamento: { id:agendamento.id } });
+    const agendamento:Agendamento = await getAgendamentoPelaFactory();
+    const repositorio:Repository<Consulta> = getRepository(Consulta);
+    const consulta = await repositorio.save({ agendamento: { id:agendamento.id } });
     return consulta;
 }

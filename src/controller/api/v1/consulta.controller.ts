@@ -27,11 +27,11 @@ router.post('/:agendamento/iniciar', validacaoIniciarConsulta, async (req, res) 
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Persiste e retorna
-            let consulta:Consulta = await getRepository(Consulta).save(req.body);
+            const consulta:Consulta = await getRepository(Consulta).save(req.body);
             return res.status(201).send(consulta);
         }
         catch (e) {
@@ -48,11 +48,11 @@ router.get('/:consulta', async (req, res) => {
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Busca e retorna
-            let consulta:Consulta = await getRepository(Consulta).findOneOrFail(req.params.consulta);
+            const consulta:Consulta = await getRepository(Consulta).findOneOrFail(req.params.consulta);
             return res.status(200).send(consulta);
         }
         catch (e) {
@@ -69,11 +69,11 @@ router.put('/:consulta', validacaoObservacao, async (req, res) => {
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Buscar na base
-            let repositorio:Repository<Consulta> = getRepository(Consulta);
+            const repositorio:Repository<Consulta> = getRepository(Consulta);
             let consulta:Consulta = await repositorio.findOneOrFail(req.params.consulta);
 
             // Persiste e retorna
@@ -94,11 +94,11 @@ router.post('/:consulta/anotacao', validacaoAnotacao, async (req, res) => {
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Persiste e retorna
-            let anotacao:ConsultaAnotacao = await getRepository(ConsultaAnotacao).save({ "id":req.params.consulta, "conteudo":req.body.conteudo });
+            const anotacao:ConsultaAnotacao = await getRepository(ConsultaAnotacao).save({ "id":req.params.consulta, "conteudo":req.body.conteudo });
             return res.status(201).send(anotacao);
         }
         catch (e) {

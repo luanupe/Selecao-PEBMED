@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 
 export async function getHashSenha(senha:string) {
-    let rounds:number = parseInt(process.env.BCRYPT_ROUNDS);
-    let salt = await bcrypt.genSalt(rounds);
+    const rounds:number = parseInt(process.env.BCRYPT_ROUNDS);
+    const salt = await bcrypt.genSalt(rounds);
     return await bcrypt.hash(senha, salt);
 }
 

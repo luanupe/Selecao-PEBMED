@@ -9,13 +9,13 @@ export default class CriarMedico implements Seeder {
 
     public async run(factory: Factory, connection: Connection): Promise<any> {
 
-      let senha:string = await getHashSenha("123456");
+      const hash:string = await getHashSenha("123456");
 
       await connection
         .createQueryBuilder()
         .insert().into(Medico)
         .values([
-            { nome:"Médico Teste", email: "medico@prontomed.com", senha:senha, status:true }
+            { nome:"Médico Teste", email: "medico@prontomed.com", senha:hash, status:true }
         ]).execute();
     }
 

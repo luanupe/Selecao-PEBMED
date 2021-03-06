@@ -15,7 +15,7 @@ const REGEX_TELEFONE = /^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/;
     [OK] Validar nome apenas letras e espaços
     [OK] Validar tamanho do nome (255 caracteres)
 */
-/* 
+/*
     [OK] Validar se é um email
     [OK] Validar o tamanho do email (255 caracteres)
     [OK] Validar se o email já está em uso por terceiros
@@ -47,11 +47,10 @@ export const validacaoPaciente:any[] = [
         .isEmail().withMessage('O email informado não é válido')
         .isLength({ max:255 }).withMessage('O email informado é muito grande')
         .custom(async (value) => {
-    
-            let repositorio:Repository<Paciente> = getRepository(Paciente);
-            let paciente = await repositorio.findOne({ where: { email:value } });
+
+            const paciente = await getRepository(Paciente).findOne({ where: { email:value } });
             if ((paciente != null)) return Promise.reject("O email informado já está em uso por outro paciente");
-    
+
         }),
 
     // Validar nascimento
@@ -69,7 +68,7 @@ export const validacaoPaciente:any[] = [
     // Validar altura
     body('altura')
         .isFloat().withMessage('A altura informada deve ser um número'),
-    
+
     // Validar nome
     body('telefone')
         .custom((value) => { return value.match(REGEX_TELEFONE); }).withMessage('O telefone informado está em um formato inválido.')

@@ -13,7 +13,7 @@ export async function validarJwt(req:express.Request, res:express.Response, next
     retrieveConnection().then(async () => {
         try {
             // Converter header em string
-            let token:string = String(req.headers['x-access-token']);
+            const token:string = String(req.headers['x-access-token']);
 
             // Validar o access token
             await validarToken(token, req);
@@ -32,7 +32,7 @@ async function validarToken(token:string, req:express.Request) {
     });
 
     // Validar sessão
-    let repositorio:Repository<MedicoToken> = getRepository(MedicoToken);
-    let sessao:MedicoToken|undefined = await repositorio.findOne({ relations:['medico'], where: { token:token } });
+    const repositorio:Repository<MedicoToken> = getRepository(MedicoToken);
+    const sessao:MedicoToken|undefined = await repositorio.findOne({ relations:['medico'], where: { token:token } });
     if ((sessao == null)) throw new Error('Sessão desconectada');
 }

@@ -16,11 +16,11 @@ export const validacaoIniciarConsulta:any[] = [
         .custom(async (value) => {
 
             // Checar se o agendamento existe
-            let agendamento = await getRepository(Agendamento).findOne(value.id);
+            const agendamento = await getRepository(Agendamento).findOne(value.id);
             if ((agendamento == null)) return Promise.reject("O agendamento informado não existe.");
 
             // Checar se já existe uma consulta para o agentamento
-            let consulta = await getRepository(Consulta).findOne(value.id);
+            const consulta = await getRepository(Consulta).findOne(value.id);
             if ((consulta != null)) return Promise.reject("Já existe uma consulta para este agendamento.");
 
         })

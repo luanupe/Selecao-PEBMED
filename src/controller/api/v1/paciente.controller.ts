@@ -24,7 +24,7 @@ router.use(validarJwt);
 router.get('/', async (req, res) => {
     retrieveConnection().then(async () => {
 
-        let pacientes:Paciente[] = await getRepository(Paciente).find({ withDeleted: true });
+        const pacientes:Paciente[] = await getRepository(Paciente).find({ withDeleted: true });
         return res.send(pacientes);
 
     });
@@ -37,11 +37,11 @@ router.post('/', validacaoPaciente, async (req, res) => {
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Persistir paciente
-            let paciente:Paciente = await getRepository(Paciente).save(req.body);
+            const paciente:Paciente = await getRepository(Paciente).save(req.body);
             return res.status(201).send(paciente);
         }
         catch (e) {
@@ -57,7 +57,7 @@ router.get('/:paciente', async (req, res) => {
     retrieveConnection().then(async () => {
 
         try {
-            let paciente:Paciente = await getRepository(Paciente).findOneOrFail(req.params.paciente);
+            const paciente:Paciente = await getRepository(Paciente).findOneOrFail(req.params.paciente);
             return res.send(paciente);
         }
         catch (e) {
@@ -74,11 +74,11 @@ router.put('/:paciente', validacaoPaciente, async (req, res) => {
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Busca na base para garantir que o paciente existe
-            let repositorio:Repository<Paciente> = getRepository(Paciente);
+            const repositorio:Repository<Paciente> = getRepository(Paciente);
             let paciente:Paciente = await getRepository(Paciente).findOneOrFail(req.params.paciente);
 
             // Persiste e retorna
@@ -99,11 +99,11 @@ router.delete('/:paciente', async (req, res) => {
 
         try {
             // Busca na base para garantir que o paciente existe
-            let repositorio:Repository<Paciente> = getRepository(Paciente);
+            const repositorio:Repository<Paciente> = getRepository(Paciente);
             let paciente:Paciente = await repositorio.findOneOrFail(req.params.paciente);
 
             // Remove dados sensitivos
-            let data = { id:paciente.id, email:null, nome:null, nascimento:null, sexo:null, peso:null, altura:null, telefone:null };
+            const data = { id:paciente.id, email:null, nome:null, nascimento:null, sexo:null, peso:null, altura:null, telefone:null };
             paciente = await repositorio.save(data);
 
             // Persiste e retorna
@@ -111,7 +111,6 @@ router.delete('/:paciente', async (req, res) => {
             return res.status(410).send(paciente);
         }
         catch (e) {
-            console.log(e);
             return res.status(401).json({ 'error':getError(e) }).end();
         }
 

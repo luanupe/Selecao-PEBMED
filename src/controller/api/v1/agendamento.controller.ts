@@ -25,7 +25,7 @@ router.use(validarJwt);
 router.get('/', async (req, res) => {
     retrieveConnection().then(async () => {
 
-        let agendamentos:Agendamento[] = await getRepository(Agendamento).find();
+        const agendamentos:Agendamento[] = await getRepository(Agendamento).find();
         return res.status(200).send(agendamentos);
 
     });
@@ -38,14 +38,14 @@ router.post('/', validacaoAgendamento, async (req, res) => {
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // TimeZone
             req.body.horario = moment(req.body.horario).format("YYYY-MM-DD hh:mm:ss");
 
             // Persistir agendamento
-            let agendamento:Agendamento = await getRepository(Agendamento).save(req.body);
+            const agendamento:Agendamento = await getRepository(Agendamento).save(req.body);
             return res.status(201).send(agendamento);
         }
         catch (e) {
@@ -61,7 +61,7 @@ router.get('/:agendamento', async (req, res) => {
     retrieveConnection().then(async () => {
 
         try {
-            let agendamento:Agendamento = await getRepository(Agendamento).findOneOrFail(req.params.agendamento);
+            const agendamento:Agendamento = await getRepository(Agendamento).findOneOrFail(req.params.agendamento);
             return res.status(200).send(agendamento);
         }
         catch (e) {
@@ -78,12 +78,12 @@ router.put('/:agendamento', validacaoAgendamento, async (req, res) => {
 
         try {
             // Validar payload
-            let errors = validationResult(req);
+            const errors = validationResult(req);
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Busca na base para garantir que o agendamento existe
-            let repositorio:Repository<Agendamento> = getRepository(Agendamento);
-            let agendamento:Agendamento = await repositorio.findOneOrFail(req.params.agendamento);
+            const repositorio:Repository<Agendamento> = getRepository(Agendamento);
+            const agendamento:Agendamento = await repositorio.findOneOrFail(req.params.agendamento);
 
             // TimeZone
             req.body.horario = moment(req.body.horario).format("YYYY-MM-DD hh:mm:ss");
@@ -93,7 +93,6 @@ router.put('/:agendamento', validacaoAgendamento, async (req, res) => {
             return res.status(201).send(agendamento);
         }
         catch (e) {
-            console.log(e);
             return res.status(401).json({ 'error':getError(e) }).end();
         }
 
@@ -107,8 +106,8 @@ router.delete('/:agendamento', async (req, res) => {
 
         try {
             // Busca na base para garantir que o agendamento existe
-            let repositorio:Repository<Agendamento> = getRepository(Agendamento);
-            let agendamento:Agendamento = await repositorio.findOneOrFail(req.params.agendamento);
+            const repositorio:Repository<Agendamento> = getRepository(Agendamento);
+            const agendamento:Agendamento = await repositorio.findOneOrFail(req.params.agendamento);
 
             // Persiste e retorna
             await repositorio.softDelete(agendamento.id);

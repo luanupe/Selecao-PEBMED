@@ -23,16 +23,16 @@ export const validacaoAgendamento:any[] = [
     body('horario')
         .custom(async (value) => {
 
-            let status:boolean = await validarHorario(value);
+            const status:boolean = await validarHorario(value);
             if (!(status)) return Promise.reject("Já existe outro paciente agendado para esse horário");
 
         }),
-    
+
     // Validar médico
     body('medico').isObject().withMessage('Dados do médico é inválido')
         .custom(async (value) => {
 
-            let medico = await getRepository(Medico).findOne(value.id);
+            const medico = await getRepository(Medico).findOne(value.id);
             if ((medico == null)) return Promise.reject("Médico não encontrado");
 
         }),
@@ -41,33 +41,33 @@ export const validacaoAgendamento:any[] = [
     body('paciente').isObject().withMessage('Dados do paciente é inválido')
     .custom(async (value) => {
 
-        let medico = await getRepository(Paciente).findOne(value.id);
-        if ((medico == null)) return Promise.reject("Paciente não encontrado");
+        const paciente = await getRepository(Paciente).findOne(value.id);
+        if ((paciente == null)) return Promise.reject("Paciente não encontrado");
 
     })
 ];
 
 /**
  * FINALMENTE!!!!!
- * Subtrai 20 minutos da data inicial e pega todas as consultas 
- * marcadas até a data do início da sessão, se tiver algum registro 
+ * Subtrai 20 minutos da data inicial e pega todas as consultas
+ * marcadas até a data do início da sessão, se tiver algum registro
  * significa que já tem outras consultas no horário selecionado.
- * 
+ *
  * Colocar esse tempo no ENV?
  */
 async function validarHorario(value):Promise<boolean> {
     // Calcular 20 minutos de duração da sessão
-    let end:Date = new Date(value);
-    let start:Date = new Date(end);
+    const end:Date = new Date(value);
+    const start:Date = new Date(end);
     start.setMinutes(start.getMinutes() - 20);
 
     // Formatar para between - AAAAAAAAAAA pq não funcionaaaaaaa??????
-    let inicio = moment(start).format("YYYY-MM-DD hh:mm:ss");
-    let fim = moment(end).format("YYYY-MM-DD hh:mm:ss");
+    const inicio = moment(start).format("YYYY-MM-DD hh:mm:ss");
+    const fim = moment(end).format("YYYY-MM-DD hh:mm:ss");
 
     // Buscar agendamentos no mesmo horário
-    let repositorio:Repository<Agendamento> = getRepository(Agendamento);
-    let agendamentos = await repositorio.find({
+    const repositorio:Repository<Agendamento> = getRepository(Agendamento);
+    const agendamentos = await repositorio.find({
         where: {
             horario: Between(inicio, fim),
         }
