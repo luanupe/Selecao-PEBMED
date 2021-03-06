@@ -8,6 +8,14 @@ Mesmo tendo a opção de utilizar PHP/Laravel, optei por Node.JS, mesmo não est
 
 Sobre o Docker: não consegui rodar a aplicação através de um container Docker, não pelo fato de eu nunca ter utilizado o mesmo, mas pelo motivo de que meu notebook aparentemente não é compatível, é necessário habilitar na BIOS a virtualização, no entanto, mesmo após a atualização do Firmware da BIOS essa opção não ficou disponível, sempre que tento instalar o Docker fico preso na seguinte mensagem: Hardware assisted virtualization and data execution protection must be enabled in the BIOS.
 
+# Instância AWS
+
+ec2-3-21-44-33.us-east-2.compute.amazonaws.com:8000
+ou
+3.21.44.33:8000
+
+Lembrando que o IP Público não é fixo
+
 ## Checklist 
 
 - [x] REST
@@ -18,6 +26,7 @@ Sobre o Docker: não consegui rodar a aplicação através de um container Docke
 - [x] MySQL
 - [x] Testes Unitários
 - [ ] Docker
+- [x] Deploy AWS
 - [x] JWT Token
 - [x] Lint
 
