@@ -21,7 +21,7 @@ const jwt = require('jsonwebtoken');
 // [OK] Postman
 // [OK] Jest
 router.post('/login', validacaoLogin, async (req, res) => {
-    retrieveConnection().then(async () => {
+    retrieveConnection().then(async (conn) => {
 
         try {
             // Validar payload
@@ -29,7 +29,7 @@ router.post('/login', validacaoLogin, async (req, res) => {
             if (!(errors.isEmpty())) throw new ValidationException(errors);
 
             // Buscar médico com o email informado
-            let medico:Medico = await getRepository(Medico).findOneOrFail({ where: { email:req.body.email } });
+            let medico:Medico = await conn.getRepository(Medico).findOneOrFail({ where: { email:req.body.email } });
 
             // Validar senha
             let senha:boolean = await validarHashSenha(req.body.senha, medico.senha);

@@ -11,9 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
 // Controllers
-app.use('/api/v1/autenticar', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'autenticar.controller.ts')));
-app.use('/api/v1/paciente', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'paciente.controller.ts')));
-app.use('/api/v1/agendamento', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'agendamento.controller.ts')));
-app.use('/api/v1/consulta', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'consulta.controller.ts')));
+app.use('/api/v1/autenticar', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'autenticar.controller')));
+app.use('/api/v1/paciente', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'paciente.controller')));
+app.use('/api/v1/agendamento', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'agendamento.controller')));
+app.use('/api/v1/consulta', require(path.join(__dirname, 'src', 'controller', 'api', 'v1', 'consulta.controller')));
 
 module.exports = app
