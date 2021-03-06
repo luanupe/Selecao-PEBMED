@@ -68,7 +68,8 @@ export async function getAgendamentoPelaFactory(): Promise<Agendamento> {
 }
 
 // Factory consulta
-export async function getConsultaPelaFactor(): Promise<Consulta> {
+
+export async function getConsultaPelaFactory(): Promise<Consulta> {
     let agendamento:Agendamento = await getAgendamentoFactory();
     return await getRepository(Consulta).save({ agendamento: { id:agendamento.id } });
 }
