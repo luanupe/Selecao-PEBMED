@@ -54,6 +54,8 @@ Lembrando que o IP Público não é fixo, uma vez que estou utilizando uma máqu
 
 ## Postman (Documentação API)
 
+Ao executar os testes através do Postman, é válido salientar que é necessário selecionar o Environment "Development" por conta das variáveis necessárias, caso queira testar na instância AWS é necessário alterar o valor contido na variável SERVER_ADDRESS pois a mesma está localhost no momento.
+
 A aplicação foi dividida em 4 "módulos" (controllers), é possível importar as Collections a partir dos seguintes links:
 
 - [Autenticação](https://app.getpostman.com/run-collection/028226daa69df86ca430#?env%5BDevelopment%5D=W3sia2V5IjoiU0VSVkVSX1BPUlQiLCJ2YWx1ZSI6IjgwMDAiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IlNFUlZFUl9BRERSRVNTIiwidmFsdWUiOiJsb2NhbGhvc3QiLCJlbmFibGVkIjp0cnVlfV0=) (Login, Logout - JWT Tokens)
