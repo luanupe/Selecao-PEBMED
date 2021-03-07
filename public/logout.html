@@ -1,0 +1,10 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+<script src="./assets/js/chotadb.min.js"></script>
+<script src="./assets/app.js"></script>
+
+<script>
+    $(function() {
+        requestAPI('/autenticar/logout', 'POST');
+        window.location.href = "/index.html";
+    });
+</script>

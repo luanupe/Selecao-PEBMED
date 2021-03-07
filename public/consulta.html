@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ProntoMed - Consulta</title>
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="pacientes.html">ProntoMED</a>
+            <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="logout.html">Sair</a>
+            </li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/pacientes.html">
+                                    <span data-feather="inicio"></span>Pacientes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/agendamentos.html">
+                                    <span data-feather="agendamentos"></span>Agendamentos <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h2>Consulta de <span id="consulta-paciente-nome"></span></h2>
+                        </div>
+                        <div class="col-md-5 text-right">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#adicionar-observacao">Adicionar Observação</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#adicionar-anotacao">Adicionar Anotação</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-2"><hr /></div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>Horário Marcado:</b> <span id="consulta-agendamento-horario"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>Agendado Em:</b> <span id="consulta-agendamento-createdat"></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><b>Observação:</b> <span id="consulta-observacao"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-2"><hr /></div>
+
+                    <div class="card">
+                        <div class="card-header">Anotações</div>
+                        <div class="card-body">
+                            <ul id="consulta-anotacoes"></ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <div id="adicionar-observacao" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Adicionar Observação</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="adicionar-observacao-form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Observações:</label>
+                                <textarea name="observacao" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Atualizar Observação" class="btn btn-success"></input>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <div id="adicionar-anotacao" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Adicionar Anotação</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="adicionar-anotacao-form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Anotação:</label>
+                                <textarea name="conteudo" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Adicionar Anotação" class="btn btn-success"></input>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" crossorigin="anonymous"></script>
+        <script src="./assets/js/chotadb.min.js"></script>
+        <script src="./assets/app.js"></script>
+        <script src="./pages/consulta.js"></script>
+    </body>
+</html>
