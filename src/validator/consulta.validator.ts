@@ -49,7 +49,7 @@ export const validacaoAnotacao:any[] = [
     
     // Validar agendamento
     body('consulta')
-        .isObject().withMessage('As informações de agendamento não são válidas')
+        .isObject().withMessage('As informações de consulta não são válidas')
         .custom(async (value) => {
 
             // Checar se a consulta existe na base
